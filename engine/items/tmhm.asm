@@ -150,7 +150,6 @@ TeachTMHM:
 
 	ld c, HAPPINESS_LEARNMOVE
 	callfar ChangeHappiness
-	call ConsumeTM
 	jr .learned_move
 
 .nope
@@ -512,27 +511,6 @@ VerboseReceiveTMHM: ; unreferenced
 	cp MAX_ITEM_STACK + 1
 	ret nc
 	ld [hl], a
-	ret
-
-ConsumeTM:
-	call ConvertCurItemIntoCurTMHM
-	ld a, [wTempTMHM]
-	dec a
-	ld hl, wTMsHMs
-	ld b, 0
-	ld c, a
-	add hl, bc
-	ld a, [hl]
-	and a
-	ret z
-	dec a
-	ld [hl], a
-	ret nz
-	ld a, [wTMHMPocketScrollPosition]
-	and a
-	ret z
-	dec a
-	ld [wTMHMPocketScrollPosition], a
 	ret
 
 CountTMsHMs:
