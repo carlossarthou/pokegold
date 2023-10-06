@@ -1612,3 +1612,8 @@ _SlotsBetHowManyCoinsText::
 	text "Bet how many"
 	line "coins?"
 	done
+
+_CantDepositText::
+	text "Can't deposit"
+	line "this item."
+	prompt
