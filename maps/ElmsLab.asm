@@ -442,6 +442,7 @@ AideScript_WalkBalls1:
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksRight1
 	turnobject PLAYER, DOWN
 	scall AideScript_GiveYouBalls
+	scall AideScript_GiveYouExpShare
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksLeft1
 	end
 
@@ -449,6 +450,7 @@ AideScript_WalkBalls2:
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksRight2
 	turnobject PLAYER, DOWN
 	scall AideScript_GiveYouBalls
+	scall AideScript_GiveYouExpShare
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksLeft2
 	end
 
@@ -463,11 +465,21 @@ AideScript_GiveYouBalls:
 	promptbutton
 	itemnotify
 	closetext
-	setscene SCENE_ELMSLAB_NOOP
 	end
 
 AideScript_ReceiveTheBalls:
 	jumpstd ReceiveItemScript
+	end
+
+AideScript_GiveYouExpShare:
+	opentext
+	writetext AideText_GiveYouExpShare
+	promptbutton
+	verbosegiveitem EXP_SHARE
+	writetext AideText_FromProfOak
+	waitbutton
+	closetext
+	setscene SCENE_ELMSLAB_NOOP
 	end
 
 ElmsAideScript:
@@ -1122,6 +1134,23 @@ AideText_ExplainBalls:
 	para "Throw # BALLS"
 	line "at wild #MON"
 	cont "to get them."
+	done
+
+AideText_GiveYouExpShare:
+	text "Oh!"
+	
+	para "PROF.ELM forgot"
+	line "to give you"
+	cont "something..."
+
+	para "Mr.#MON wanted"
+	line "you to have this"
+	cont "EXP.SHARE!"
+	done
+
+AideText_FromProfOak:
+	text "I think it was"
+	line "from PROF.OAK."
 	done
 
 ElmsLabOfficerText1:
