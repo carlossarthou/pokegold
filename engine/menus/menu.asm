@@ -566,8 +566,8 @@ _ExitMenu::
 	ret
 
 RestoreOverworldMapTiles:
-	ld a, [wVramState]
-	bit 0, a
+	ld a, [wStateFlags]
+	bit SPRITE_UPDATES_DISABLED_F, a
 	ret z
 	xor a ; sScratch
 	call OpenSRAM
@@ -576,7 +576,7 @@ RestoreOverworldMapTiles:
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	call CopyBytes
 	call CloseSRAM
-	call OverworldTextModeSwitch
+	call LoadOverworldTilemapAndAttrmapPals
 	xor a ; sScratch
 	call OpenSRAM
 	ld hl, sScratch
