@@ -37,7 +37,7 @@ ApplyTilemap::
 	jr z, .dmg
 
 	ld a, [wSpriteUpdatesEnabled]
-	cp 0
+	cp FALSE
 	jr z, .dmg
 
 	ld a, 1
@@ -136,12 +136,12 @@ endr
 	ld sp, hl
 	ret
 
-SetPalettes::
+SetDefaultBGPAndOBP::
 ; Inits the Palettes
 ; depending on the system the monochromes palettes or color palettes
 	ldh a, [hCGB]
 	and a
-	jr nz, .SetPalettesForGameBoyColor
+	jr nz, .SetDefaultBGPAndOBPForGameBoyColor
 	ld a, %11100100
 	ldh [rBGP], a
 	ld a, %11010000
@@ -149,7 +149,7 @@ SetPalettes::
 	ldh [rOBP1], a
 	ret
 
-.SetPalettesForGameBoyColor:
+.SetDefaultBGPAndOBPForGameBoyColor:
 	push de
 	ld a, %11100100
 	call DmgToCgbBGPals
